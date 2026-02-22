@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Primary SEO -->
+    <title>LuaCord - Write Minecraft Plugins in Lua | Spigot & Paper</title>
+    <meta name="description" content="LuaCord lets you create powerful Minecraft plugins using simple Lua scripting — no Java needed. Full Spigot & Paper API access, hot reload, and JAR packaging. Now in 0.2.0 BETA with JAR generator. Free download on CurseForge & Modrinth.">
+    <meta name="keywords" content="minecraft lua plugin, lua minecraft, luacord, spigot lua, paper lua plugin, minecraft plugin framework, bukkit lua, write minecraft plugins lua, no java minecraft plugin, lukkit alternative, minecraft scripting, lua scripting minecraft server">
+    <meta name="author" content="TheGamingMahi">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#4A90E2">
+    <link rel="canonical" href="https://luacord.net/">
+
+    <!-- Open Graph (Facebook, Discord, etc.) -->
+    <meta property="og:title" content="LuaCord - Write Minecraft Plugins in Lua">
+    <meta property="og:description" content="Create powerful Minecraft plugins with simple Lua scripting. No Java needed. Full Spigot & Paper API access. Free on CurseForge & Modrinth.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://luacord.net/">
+    <meta property="og:image" content="https://luacord.net/static/logo.png">
+    <meta property="og:image:alt" content="LuaCord Logo">
+    <meta property="og:site_name" content="LuaCord">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="LuaCord - Write Minecraft Plugins in Lua">
+    <meta name="twitter:description" content="Create powerful Minecraft plugins with simple Lua scripting. No Java needed. Free on CurseForge & Modrinth.">
+    <meta name="twitter:image" content="https://luacord.net/static/logo.png">
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "LuaCord",
+      "description": "A modern Minecraft plugin framework that lets you create powerful plugins using simple Lua scripting with full Spigot and Paper API access.",
+      "applicationCategory": "GameApplication",
+      "operatingSystem": "Windows, macOS, Linux",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "TheGamingMahi"
+      },
+      "url": "https://luacord.net/",
+      "downloadUrl": "https://www.curseforge.com/minecraft/bukkit-plugins/luacord",
+      "softwareVersion": "latest",
+      "keywords": "minecraft, lua, plugin, spigot, paper, bukkit"
+    }
+    </script>
+    
+    <!-- Favicons -->
+    <link rel="icon" href="static/favicon.ico" sizes="any">
+    <link rel="apple-touch-icon" sizes="180x180" href="static/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="static/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="static/favicon-16x16.png">
+    <link rel="manifest" href="static/site.webmanifest">
+    
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap');
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0a0a0a;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #4A90E2 0%, #50E3C2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .gradient-button {
+            background: linear-gradient(135deg, #4A90E2 0%, #50E3C2 100%);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .gradient-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 40px rgba(74, 144, 226, 0.3);
+        }
+        
+        .feature-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s;
+        }
+        
+        .feature-card:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: #4A90E2;
+            transform: translateY(-5px);
+        }
+        
+        .code-block {
+            background: #161616;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s;
+        }
+        
+        .code-block:hover {
+            border-color: #4A90E2;
+            box-shadow: 0 8px 30px rgba(74, 144, 226, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animate-fadein {
+            animation: fadeInUp 0.6s ease-out;
+        }
+        
+        .animate-delay-1 {
+            animation-delay: 0.2s;
+            opacity: 0;
+            animation-fill-mode: forwards;
+        }
+        
+        .logo-svg {
+            filter: drop-shadow(0 0 30px rgba(74, 144, 226, 0.5));
+        }
+        
+        /* Mobile menu */
+        .mobile-menu {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+        
+        .mobile-menu.active {
+            max-height: 300px;
+        }
+        
+        /* Download Dropdown Menu */
+        .download-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            margin-top: 0.5rem;
+            background: rgba(20, 20, 20, 0.98);
+            border: 1px solid rgba(74, 144, 226, 0.3);
+            border-radius: 0.75rem;
+            padding: 0.5rem;
+            min-width: 220px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+        }
+        
+        .download-dropdown:hover .dropdown-menu,
+        .download-dropdown.active .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        .dropdown-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            transition: all 0.2s;
+            text-decoration: none;
+            color: white;
+        }
+        
+        .dropdown-item:hover {
+            background: rgba(74, 144, 226, 0.2);
+            transform: translateX(4px);
+        }
+        
+        .dropdown-icon {
+            width: 24px;
+            height: 24px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+        
+        .dropdown-text {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .dropdown-title {
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+        
+        .dropdown-subtitle {
+            font-size: 0.75rem;
+            color: #9CA3AF;
+        }
+    </style>
+</head>
+<body class="text-white">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-black/50 backdrop-blur-md z-50 border-b border-white/10">
+        <div class="max-w-7xl mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <a href="index.html" class="flex items-center">
+                    <img src="static/logo.png" alt="LuaCord" class="w-10 h-10">
+                </a>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8">
+                    <a href="#home" class="hover:text-blue-400 transition">Home</a>
+                    <a href="#features" class="hover:text-blue-400 transition">Features</a>
+                    <a href="#quickstart" class="hover:text-blue-400 transition">Quick Start</a>
+                    <a href="generator.html" class="hover:text-blue-400 transition">JAR Generator</a>
+                </div>
+                
+                <!-- Mobile Menu Button -->
+                <button id="mobileMenuBtn" class="md:hidden text-white" aria-label="Toggle menu">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+            
+            <!-- Mobile Menu -->
+            <div id="mobileMenu" class="mobile-menu md:hidden">
+                <div class="pt-4 pb-2 space-y-2">
+                    <a href="#home" class="block py-2 hover:text-blue-400 transition">Home</a>
+                    <a href="#features" class="block py-2 hover:text-blue-400 transition">Features</a>
+                    <a href="#quickstart" class="block py-2 hover:text-blue-400 transition">Quick Start</a>
+                    <a href="generator.html" class="block py-2 hover:text-blue-400 transition">JAR Generator</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center pt-20">
+        <div class="max-w-7xl mx-auto px-6 py-20 grid md:grid-cols-2 gap-12 items-center">
+            <div>
+                <h1 class="text-6xl md:text-7xl font-black mb-6 leading-tight">
+                    <span class="gradient-text">LuaCord</span><br>
+                    <span class="text-white">Write Minecraft<br>plugins in Lua</span>
+                </h1>
+                <!-- Version badge -->
+                <div class="inline-flex items-center gap-2 bg-blue-500/10 border border-blue-500/30 rounded-full px-4 py-1.5 mb-6">
+                    <div style="width:8px;height:8px;border-radius:50%;background:#4A90E2;box-shadow:0 0 6px 2px rgba(74,144,226,0.6);"></div>
+                    <span class="text-xs font-semibold text-blue-400 tracking-widest uppercase">0.2.0 BETA — Now with JAR Support</span>
+                </div>
+                <p class="text-gray-400 text-lg mb-8 leading-relaxed">
+                    A modern fork of Lukkit — rewritten in Kotlin with full Paper compatibility. Create powerful Minecraft plugins using Lua scripting with complete Spigot API access. No Java. No compilation. Just write and reload.
+                </p>
+                <div class="flex flex-wrap gap-4">
+                    <!-- Fancy Download Dropdown -->
+                    <div class="download-dropdown">
+                        <button class="gradient-button px-8 py-3 rounded-lg font-semibold flex items-center gap-2">
+                            Download
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <div class="dropdown-menu">
+                            <a href="https://www.curseforge.com/minecraft/bukkit-plugins/luacord" class="dropdown-item" rel="noopener noreferrer" target="_blank">
+                                <div class="dropdown-icon">
+                                    <div style="width:16px;height:16px;border-radius:50%;background:#F97316;box-shadow:0 0 10px 3px rgba(249,115,22,0.6);flex-shrink:0;"></div>
+                                </div>
+                                <div class="dropdown-text">
+                                    <span class="dropdown-title">CurseForge</span>
+                                    <span class="dropdown-subtitle">Download from CurseForge</span>
+                                </div>
+                            </a>
+                            <a href="https://modrinth.com/plugin/luacord" class="dropdown-item" rel="noopener noreferrer" target="_blank">
+                                <div class="dropdown-icon">
+                                    <div style="width:16px;height:16px;border-radius:50%;background:#22C55E;box-shadow:0 0 10px 3px rgba(34,197,94,0.6);flex-shrink:0;"></div>
+                                </div>
+                                <div class="dropdown-text">
+                                    <span class="dropdown-title">Modrinth</span>
+                                    <span class="dropdown-subtitle">Download from Modrinth</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <a href="https://docs.lukkit.net/" class="px-8 py-3 rounded-lg font-semibold border-2 border-blue-500 hover:bg-blue-500/10 transition" rel="noopener noreferrer" target="_blank">
+                        Docs
+                    </a>
+                    <a href="generator.html" class="px-8 py-3 rounded-lg font-semibold border-2 border-gray-600 hover:border-blue-500 hover:bg-blue-500/10 transition">
+                        JAR Generator
+                    </a>
+                    <a href="https://github.com/TheGamingMahi/LuaCord" class="px-8 py-3 rounded-lg font-semibold border-2 border-gray-600 hover:border-gray-500 transition" rel="noopener noreferrer" target="_blank">
+                        GitHub
+                    </a>
+                </div>
+            </div>
+            <div class="flex justify-center">
+                <img src="static/logo.png" alt="LuaCord Logo" class="w-80 h-80 logo-svg object-contain">
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-20">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-16">
+                Why <span class="gradient-text">LuaCord</span>?
+            </h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="feature-card rounded-xl p-8">
+                    <div class="text-5xl mb-4" role="img" aria-label="Target icon">🎯</div>
+                    <h3 class="text-2xl font-bold mb-4">Easy to Learn</h3>
+                    <p class="text-gray-400 leading-relaxed">
+                        Lua is much simpler than Java. No compilation needed, just write and reload. Perfect for beginners and rapid development.
+                    </p>
+                </div>
+                <div class="feature-card rounded-xl p-8">
+                    <div class="text-5xl mb-4" role="img" aria-label="Lightning icon">⚡</div>
+                    <h3 class="text-2xl font-bold mb-4">Full API Access</h3>
+                    <p class="text-gray-400 leading-relaxed">
+                        Complete access to the Spigot API. Commands, events, permissions - everything works just like Java plugins.
+                    </p>
+                </div>
+                <div class="feature-card rounded-xl p-8">
+                    <div class="text-5xl mb-4" role="img" aria-label="Package icon">📦</div>
+                    <h3 class="text-2xl font-bold mb-4">JAR Support</h3>
+                    <p class="text-gray-400 leading-relaxed">
+                        Package your Lua plugins as proper .jar files for easy distribution on CurseForge and other platforms.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Start Section -->
+    <section id="quickstart" class="py-20">
+        <div class="max-w-5xl mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-16">
+                Get Started in <span class="gradient-text">Minutes</span>
+            </h2>
+            
+            <div class="space-y-6 mb-12">
+                <div class="code-block rounded-xl p-6 animate-fadein">
+                    <div class="text-sm text-gray-500 mb-2">main.lua</div>
+                    <pre class="text-sm overflow-x-auto"><code class="text-gray-300">plugin:onEnable(function()
+    logger:info("Plugin enabled!")
+end)
+
+plugin:addCommand({
+    name = "heal",
+    description = "Heal yourself"
+}, function(event)
+    local player = event:getSender()
+    player:setHealth(20)
+    player:sendMessage("Healed!")
+end)
+
+plugin:registerEvent("PlayerJoinEvent", function(event)
+    local player = event:getPlayer()
+    player:sendMessage("Welcome to the server!")
+end)</code></pre>
+                </div>
+
+                <div class="code-block rounded-xl p-6 animate-fadein animate-delay-1">
+                    <div class="text-sm text-gray-500 mb-2">plugin.yml</div>
+                    <pre class="text-sm overflow-x-auto"><code class="text-gray-300">name: MyPlugin
+version: 1.0
+main: main.lua
+author: YourName
+description: My awesome plugin</code></pre>
+                </div>
+            </div>
+
+            <div class="bg-blue-500/10 border border-blue-500/30 rounded-xl p-6">
+                <h3 class="text-xl font-bold mb-3 flex items-center">
+                    <span class="text-2xl mr-3" role="img" aria-label="Light bulb">💡</span>
+                    Installation
+                </h3>
+                <ol class="space-y-2 text-gray-300">
+                    <li>1. Download LuaCord and place in <code class="bg-black/50 px-2 py-1 rounded">/plugins/</code></li>
+                    <li>2. Add your <code class="bg-black/50 px-2 py-1 rounded">.lkt</code> plugins to <code class="bg-black/50 px-2 py-1 rounded">/plugins/</code></li>
+                    <li>3. Restart your server - done!</li>
+                </ol>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-white/10 py-12 mt-20">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid md:grid-cols-3 gap-8 mb-8">
+                <div>
+                    <h4 class="font-bold text-lg mb-4 gradient-text">LuaCord</h4>
+                    <p class="text-gray-400 text-sm">
+                        Modern Minecraft plugin framework using Lua. Forked from Lukkit with full Paper compatibility. Currently in <span class="text-blue-400 font-semibold">0.2.0 BETA</span>.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="font-bold text-lg mb-4">Links</h4>
+                    <div class="space-y-2 text-sm">
+                        <a href="https://www.curseforge.com/minecraft/bukkit-plugins/luacord" class="block text-gray-400 hover:text-blue-400 transition" rel="noopener noreferrer" target="_blank">Download</a>
+                        <a href="https://docs.lukkit.net/" class="block text-gray-400 hover:text-blue-400 transition" rel="noopener noreferrer" target="_blank">Documentation</a>
+                        <a href="https://github.com/TheGamingMahi/LuaCord" class="block text-gray-400 hover:text-blue-400 transition" rel="noopener noreferrer" target="_blank">GitHub</a>
+                        <a href="https://github.com/TheGamingMahi/LuaCord/issues" class="block text-gray-400 hover:text-blue-400 transition" rel="noopener noreferrer" target="_blank">Report Issue</a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="font-bold text-lg mb-4">Credits</h4>
+                    <div class="text-sm text-gray-400">
+                        <p class="mb-2">Created by <span class="text-blue-400">TheGamingMahi</span></p>
+                        <p class="text-xs">Based on Lukkit by the original Lukkit team</p>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center text-sm text-gray-500 pt-8 border-t border-white/10">
+                <p>LuaCord is licensed under GPL v3 • © 2026 TheGamingMahi</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Scripts -->
+    <script>
+        // Mobile Menu
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+        });
+        
+        document.querySelectorAll('#mobileMenu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+            });
+        });
+        
+        // Download Dropdown - Mobile Support
+        const downloadDropdown = document.querySelector('.download-dropdown');
+        const downloadButton = downloadDropdown.querySelector('button');
+        
+        downloadButton.addEventListener('click', (e) => {
+            if (window.innerWidth < 768) {
+                e.preventDefault();
+                downloadDropdown.classList.toggle('active');
+            }
+        });
+        
+        // Close dropdown when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!downloadDropdown.contains(e.target)) {
+                downloadDropdown.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>
