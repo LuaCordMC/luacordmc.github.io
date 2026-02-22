@@ -206,7 +206,7 @@
                             Upload .lkt Plugin *
                         </label>
                         <div class="file-upload rounded-xl p-12 text-center cursor-pointer" id="fileUpload">
-                            <input type="file" id="lktFile" accept=".lkt" class="hidden" required>
+                            <input type="file" id="lktFile" accept=".lkt,application/zip,application/octet-stream" class="hidden" required>
                             <div id="uploadPrompt">
                                 <div class="text-5xl mb-4">📦</div>
                                 <p class="text-lg font-semibold mb-2">Drop your .lkt file here</p>
@@ -224,7 +224,7 @@
                         <p class="text-xs text-gray-500 mt-2">
                             Your .lkt file contains main.lua and plugin.yml
                         </p>
-                        <p id="fileError" class="error-text hidden"></p>
+                        <p id="lktFileError" class="error-text hidden"></p>
                     </div>
 
                     <!-- Plugin Info -->
