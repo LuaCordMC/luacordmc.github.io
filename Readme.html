@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+
+<title>LuaCord Documentation - Minecraft Lua Plugin Framework</title>
+
+<meta name="description" content="LuaCord README and documentation. Learn how to create Minecraft plugins using Lua for Paper and Spigot servers. Full API access, JAR support, and hot reload.">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="robots" content="index, follow">
+
+<!-- Canonical  -->
+<link rel="canonical" href="https://luacordmc.github.io/readme.html">
+
+<!-- Open Graph (Discord, Twitter, etc.) -->
+<meta property="og:title" content="LuaCord Documentation">
+<meta property="og:description" content="Minecraft Lua Plugin Framework documentation and README.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://luacordmc.github.io/readme.html">
+<meta property="og:image" content="https://luacordmc.github.io/static/logo.png">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="LuaCord Documentation">
+<meta name="twitter:description" content="Minecraft Lua Plugin Framework README and docs.">
+<meta name="twitter:image" content="https://luacordmc.github.io/static/logo.png">
+
+<!-- Optional theme color -->
+<meta name="theme-color" content="#4A90E2">
+
+<!-- Optional favicon -->
+<link rel="icon" href="/static/favicon.ico">
+</head>
+<body id="preview">
+<h1 class="code-line has-line-data" data-line-start="0" data-line-end="1"><a id="LuaCord_0"></a>LuaCord</h1>
+<p class="has-line-data" data-line-start="2" data-line-end="3"><strong>Write real Minecraft plugins in Lua.</strong></p>
+<p class="has-line-data" data-line-start="4" data-line-end="5">LuaCord is a modern fork of <a href="https://github.com/jammehcow/Lukkit">Lukkit</a>, rewritten in Kotlin (87%) with full Paper compatibility and extended API support. Create powerful Minecraft plugins using Lua scripting with access to the complete Spigot/Paper API.</p>
+<p class="has-line-data" data-line-start="6" data-line-end="9"><a href="https://www.gnu.org/licenses/gpl-3.0"><img src="https://img.shields.io/badge/License-GPLv3-blue.svg" alt="License: GPL v3"></a><br>
+<a href="https://www.spigotmc.org/"><img src="https://img.shields.io/badge/Spigot-Compatible-orange.svg" alt="Spigot"></a><br>
+<a href="https://papermc.io/"><img src="https://img.shields.io/badge/Paper-Compatible-blue.svg" alt="Paper"></a></p>
+<hr>
+<h2 class="code-line has-line-data" data-line-start="12" data-line-end="13"><a id="Features_12"></a>🎯 Features</h2>
+<ul>
+<li class="has-line-data" data-line-start="14" data-line-end="15"><strong>Real Minecraft Plugins</strong> - Not just scripts, full plugin functionality with commands, events, and permissions</li>
+<li class="has-line-data" data-line-start="15" data-line-end="16"><strong>Full Spigot API Access</strong> - Use the entire Bukkit/Spigot API from Lua</li>
+<li class="has-line-data" data-line-start="16" data-line-end="17"><strong>JAR Support</strong> - Package plugins as <code>.jar</code> files for easy distribution on CurseForge/Modrinth</li>
+<li class="has-line-data" data-line-start="17" data-line-end="18"><strong>Paper Compatible</strong> - Works flawlessly on modern Paper servers</li>
+<li class="has-line-data" data-line-start="18" data-line-end="19"><strong>100% Backwards Compatible</strong> - All existing Lukkit <code>.lkt</code> plugins work without modification</li>
+<li class="has-line-data" data-line-start="19" data-line-end="20"><strong>Clean Console Output</strong> - No more ugly class path spam in logs</li>
+<li class="has-line-data" data-line-start="20" data-line-end="21"><strong>Hot Reload</strong> - Reload dev plugins without restarting the server</li>
+<li class="has-line-data" data-line-start="21" data-line-end="23"><strong>Modern Codebase</strong> - 87% Kotlin for better maintainability and null safety</li>
+</ul>
+<hr>
+<h2 class="code-line has-line-data" data-line-start="25" data-line-end="26"><a id="Installation_25"></a>📦 Installation</h2>
+<h3 class="code-line has-line-data" data-line-start="27" data-line-end="28"><a id="For_Server_Owners_27"></a>For Server Owners</h3>
+<ol>
+<li class="has-line-data" data-line-start="29" data-line-end="30">Download <code>LuaCord-0.2.0-BETA.jar</code></li>
+<li class="has-line-data" data-line-start="30" data-line-end="31">Place it in your server’s <code>/plugins/</code> folder</li>
+<li class="has-line-data" data-line-start="31" data-line-end="32">Place your <code>.lkt</code> or <code>.jar</code> plugin files in the same <code>/plugins/</code> folder</li>
+<li class="has-line-data" data-line-start="32" data-line-end="34">Start/restart your server</li>
+</ol>
+<p class="has-line-data" data-line-start="34" data-line-end="35"><strong>Requirements:</strong></p>
+<ul>
+<li class="has-line-data" data-line-start="35" data-line-end="36">Spigot or Paper (any version)</li>
+<li class="has-line-data" data-line-start="36" data-line-end="38">Java 8 or higher</li>
+</ul>
+<h3 class="code-line has-line-data" data-line-start="38" data-line-end="39"><a id="For_Plugin_Developers_38"></a>For Plugin Developers</h3>
+<p class="has-line-data" data-line-start="40" data-line-end="41">Check out the <a href="https://luacordmc.github.io/generator.html">JAR Generator</a> to convert your <code>.lkt</code> plugins to <code>.jar</code> files for distribution!</p>
+<hr>
+<h2 class="code-line has-line-data" data-line-start="44" data-line-end="45"><a id="Quick_Start_44"></a>🚀 Quick Start</h2>
+<h3 class="code-line has-line-data" data-line-start="46" data-line-end="47"><a id="Plugin_Structure_46"></a>Plugin Structure</h3>
+<p class="has-line-data" data-line-start="48" data-line-end="49">A LuaCord plugin can be either:</p>
+<p class="has-line-data" data-line-start="50" data-line-end="51"><strong>Option 1: <code>.lkt</code> file</strong> (ZIP archive containing):</p>
+<pre><code class="has-line-data" data-line-start="52" data-line-end="57">MyPlugin.lkt/
+├── main.lua          # Your plugin code
+├── plugin.yml        # Plugin metadata
+└── config.yml        # Optional default config
+</code></pre>
+<p class="has-line-data" data-line-start="58" data-line-end="59"><strong>Option 2: <code>.jar</code> file</strong> (For distribution on CurseForge/Modrinth):</p>
+<ul>
+<li class="has-line-data" data-line-start="59" data-line-end="60">Use the <a href="https://luacordmc.github.io/generator.html">JAR Generator</a> to wrap your <code>.lkt</code> as a <code>.jar</code></li>
+<li class="has-line-data" data-line-start="60" data-line-end="61">Shows up in <code>/plugins</code> command ✅</li>
+<li class="has-line-data" data-line-start="61" data-line-end="63">Can be uploaded to mod platforms ✅</li>
+</ul>
+<p class="has-line-data" data-line-start="63" data-line-end="64"><strong>Option 3: Folder</strong> (For development):</p>
+<pre><code class="has-line-data" data-line-start="65" data-line-end="70">/plugins/MyPlugin.lkt/ # Folder name ending with .lkt
+├── main.lua
+├── plugin.yml
+└── config.yml
+</code></pre>
+<h3 class="code-line has-line-data" data-line-start="71" data-line-end="72"><a id="Creating_Your_First_Plugin_71"></a>Creating Your First Plugin</h3>
+<p class="has-line-data" data-line-start="73" data-line-end="74"><strong>main.lua:</strong></p>
+<pre><code class="has-line-data language-lua" data-line-start="76" data-line-end="94">plugin:onEnable(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span></span>
+    logger:info(<span class="hljs-string">&quot;My plugin is enabled!&quot;</span>)
+<span class="hljs-keyword">end</span>)
+
+plugin:addCommand({
+    name = <span class="hljs-string">&quot;hello&quot;</span>,
+    description = <span class="hljs-string">&quot;Say hello!&quot;</span>,
+    usage = <span class="hljs-string">&quot;/hello&quot;</span>
+}, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(event)</span></span>
+    <span class="hljs-keyword">local</span> sender = event:getSender()
+    sender:sendMessage(<span class="hljs-string">&quot;Hello from Lua!&quot;</span>)
+<span class="hljs-keyword">end</span>)
+
+plugin:registerEvent(<span class="hljs-string">&quot;PlayerJoinEvent&quot;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(event)</span></span>
+    <span class="hljs-keyword">local</span> player = event:getPlayer()
+    player:sendMessage(<span class="hljs-string">&quot;Welcome to the server!&quot;</span>)
+<span class="hljs-keyword">end</span>)
+</code></pre>
+<p class="has-line-data" data-line-start="95" data-line-end="96"><strong>plugin.yml:</strong></p>
+<pre><code class="has-line-data language-yaml" data-line-start="97" data-line-end="103"><span class="hljs-attr">name:</span> <span class="hljs-string">MyPlugin</span>
+<span class="hljs-attr">version:</span> <span class="hljs-number">1.0</span>
+<span class="hljs-attr">main:</span> <span class="hljs-string">main.lua</span>
+<span class="hljs-attr">author:</span> <span class="hljs-string">YourName</span>
+<span class="hljs-attr">description:</span> <span class="hljs-string">My</span> <span class="hljs-string">first</span> <span class="hljs-string">LuaCord</span> <span class="hljs-string">plugin</span>
+</code></pre>
+<p class="has-line-data" data-line-start="104" data-line-end="107"><strong>For .lkt:</strong> ZIP these files and rename to <code>MyPlugin.lkt</code><br>
+<strong>For .jar:</strong> Use the <a href="https://luacordmc.github.io/generator.html">JAR Generator</a><br>
+<strong>For folder:</strong> Just place the folder in <code>/plugins/</code></p>
+<p class="has-line-data" data-line-start="108" data-line-end="109">That’s it! Restart your server and your plugin is live.</p>
+<hr>
+<h2 class="code-line has-line-data" data-line-start="112" data-line-end="113"><a id="Configuration_112"></a>⚙️ Configuration</h2>
+<p class="has-line-data" data-line-start="114" data-line-end="115"><code>config.yml</code> options:</p>
+<pre><code class="has-line-data language-yaml" data-line-start="117" data-line-end="132"><span class="hljs-comment"># Enable debug mode for verbose logging</span>
+<span class="hljs-attr">debug-mode:</span> <span class="hljs-literal">false</span>
+
+<span class="hljs-comment"># Paper compatibility mode (recommended for Paper servers)</span>
+<span class="hljs-attr">bypass-plugin-registration:</span> <span class="hljs-literal">true</span>
+
+<span class="hljs-comment"># Enable Lua debug globals</span>
+<span class="hljs-attr">lua-debug:</span> <span class="hljs-literal">false</span>
+
+<span class="hljs-comment"># Check for updates on startup</span>
+<span class="hljs-attr">update-checker:</span> <span class="hljs-literal">false</span>
+
+<span class="hljs-comment"># Allow /lukkit run command</span>
+<span class="hljs-attr">can-run-code:</span> <span class="hljs-literal">true</span>
+</code></pre>
+<p class="has-line-data" data-line-start="133" data-line-end="135"><strong>For Paper servers:</strong> Keep <code>bypass-plugin-registration: true</code><br>
+<strong>For Spigot servers:</strong> You can set it to <code>false</code></p>
+<hr>
+<h2 class="code-line has-line-data" data-line-start="138" data-line-end="139"><a id="Commands_138"></a>📚 Commands</h2>
+<ul>
+<li class="has-line-data" data-line-start="140" data-line-end="141"><code>/lukkit</code> - Show help message</li>
+<li class="has-line-data" data-line-start="141" data-line-end="142"><code>/lukkit plugins</code> - List all loaded LuaCord plugins</li>
+<li class="has-line-data" data-line-start="142" data-line-end="143"><code>/lukkit dev</code> - Show developer commands</li>
+<li class="has-line-data" data-line-start="143" data-line-end="144"><code>/lukkit dev reload &lt;plugin&gt;</code> - Hot reload a dev plugin (folder-based plugins only)</li>
+<li class="has-line-data" data-line-start="144" data-line-end="145"><code>/lukkit dev errors</code> - View error stack for debugging</li>
+<li class="has-line-data" data-line-start="145" data-line-end="146"><code>/lukkit dev pack &lt;plugin&gt;</code> - Package a dev plugin folder into <code>.lkt</code></li>
+<li class="has-line-data" data-line-start="146" data-line-end="148"><code>/lukkit dev unpack &lt;plugin&gt;</code> - Unpack a <code>.lkt</code> into a folder for development</li>
+</ul>
+<hr>
+<h2 class="code-line has-line-data" data-line-start="150" data-line-end="151"><a id="Plugin_API_150"></a>🔌 Plugin API</h2>
+<pre><code class="has-line-data language-lua" data-line-start="153" data-line-end="177"><span class="hljs-comment">-- Lifecycle hooks</span>
+plugin:onLoad(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span></span> <span class="hljs-keyword">end</span>)
+plugin:onEnable(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span></span> <span class="hljs-keyword">end</span>)
+plugin:onDisable(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span></span> <span class="hljs-keyword">end</span>)
+
+<span class="hljs-comment">-- Commands</span>
+plugin:addCommand({ name = <span class="hljs-string">&quot;cmd&quot;</span>, ... }, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(event)</span></span> <span class="hljs-keyword">end</span>)
+
+<span class="hljs-comment">-- Events</span>
+plugin:registerEvent(<span class="hljs-string">&quot;EventName&quot;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(event)</span></span> <span class="hljs-keyword">end</span>)
+
+<span class="hljs-comment">-- Server access</span>
+<span class="hljs-keyword">local</span> server = plugin:getServer()
+
+<span class="hljs-comment">-- Config</span>
+<span class="hljs-built_in">config</span>:getValue(<span class="hljs-string">&quot;path&quot;</span>)
+<span class="hljs-built_in">config</span>:set(<span class="hljs-string">&quot;path&quot;</span>, value)
+<span class="hljs-built_in">config</span>:save()
+
+<span class="hljs-comment">-- Logging</span>
+logger:info(<span class="hljs-string">&quot;message&quot;</span>)
+logger:warn(<span class="hljs-string">&quot;message&quot;</span>)
+logger:severe(<span class="hljs-string">&quot;message&quot;</span>)
+</code></pre>
+<p class="has-line-data" data-line-start="178" data-line-end="179">For full API documentation, see the <a href="https://github.com/jammehcow/Lukkit/wiki">Lukkit Wiki</a> (LuaCord is backwards compatible).</p>
+<hr>
+<h2 class="code-line has-line-data" data-line-start="182" data-line-end="183"><a id="JAR_Distribution_182"></a>📦 JAR Distribution</h2>
+<h3 class="code-line has-line-data" data-line-start="184" data-line-end="185"><a id="Why_JAR_Support_184"></a>Why JAR Support?</h3>
+<p class="has-line-data" data-line-start="186" data-line-end="187">Before 0.2.0, LuaCord plugins were <code>.lkt</code> files - great for development but:</p>
+<ul>
+<li class="has-line-data" data-line-start="187" data-line-end="188">❌ Can’t be uploaded to CurseForge/Modrinth (only accept <code>.jar</code>)</li>
+<li class="has-line-data" data-line-start="188" data-line-end="189">❌ Don’t show up in <code>/plugins</code> command on Paper (due to bypass mode requirement)</li>
+<li class="has-line-data" data-line-start="189" data-line-end="191">❌ Look unprofessional/unfamiliar to users</li>
+</ul>
+<p class="has-line-data" data-line-start="191" data-line-end="192"><strong>Now with JAR support in 0.2.0:</strong></p>
+<ul>
+<li class="has-line-data" data-line-start="192" data-line-end="193">✅ Upload to CurseForge, Modrinth, SpigotMC</li>
+<li class="has-line-data" data-line-start="193" data-line-end="194">✅ Shows in <code>/plugins</code> command!</li>
+<li class="has-line-data" data-line-start="194" data-line-end="195">✅ Professional distribution</li>
+<li class="has-line-data" data-line-start="195" data-line-end="197">✅ Still 100% Lua under the hood!</li>
+</ul>
+<h3 class="code-line has-line-data" data-line-start="197" data-line-end="198"><a id="How_to_Create_a_JAR_197"></a>How to Create a JAR</h3>
+<ol>
+<li class="has-line-data" data-line-start="199" data-line-end="200">Write your plugin as a <code>.lkt</code> file</li>
+<li class="has-line-data" data-line-start="200" data-line-end="201">Go to <a href="https://luacordmc.github.io/generator.html">luacordmc.github.io/generator.html</a></li>
+<li class="has-line-data" data-line-start="201" data-line-end="202">Upload your <code>.lkt</code> and fill in metadata</li>
+<li class="has-line-data" data-line-start="202" data-line-end="203">Download the generated <code>.jar</code></li>
+<li class="has-line-data" data-line-start="203" data-line-end="205">Upload to CurseForge/Modrinth!</li>
+</ol>
+<p class="has-line-data" data-line-start="205" data-line-end="206"><strong>The JAR generator is 100% client-side</strong> - your files never leave your browser.</p>
+<hr>
+<h2 class="code-line has-line-data" data-line-start="209" data-line-end="210"><a id="Known_Issues_209"></a>🐛 Known Issues</h2>
+<p class="has-line-data" data-line-start="211" data-line-end="212">When using <code>bypass-plugin-registration: true</code> (Paper mode):</p>
+<ul>
+<li class="has-line-data" data-line-start="213" data-line-end="215"><s>LuaCord plugins don’t appear in <code>/plugins</code></s> <strong>FIXED in 0.2.0!</strong> JAR-wrapped plugins now show up ✅</li>
+</ul>
+<p class="has-line-data" data-line-start="215" data-line-end="216"><strong>Note:</strong> <code>.lkt</code> files still don’t show in <code>/plugins</code> due to bypass mode. Use JAR plugins for better compatibility.</p>
+<hr>
+<h2 class="code-line has-line-data" data-line-start="219" data-line-end="220"><a id="Changelog_219"></a>📝 Changelog</h2>
+<h3 class="code-line has-line-data" data-line-start="221" data-line-end="222"><a id="020BETA_Current_221"></a>0.2.0-BETA <em>(Current)</em></h3>
+<p class="has-line-data" data-line-start="223" data-line-end="224"><strong>JAR Support Release - The Distribution Update</strong></p>
+<p class="has-line-data" data-line-start="225" data-line-end="226"><strong>New Features:</strong></p>
+<ul>
+<li class="has-line-data" data-line-start="226" data-line-end="227">✨ <code>.jar</code> plugin wrapper support alongside <code>.lkt</code> files</li>
+<li class="has-line-data" data-line-start="227" data-line-end="228">✨ Web-based JAR generator at <a href="https://luacordmc.github.io/generator.html">luacordmc.github.io/generator.html</a></li>
+<li class="has-line-data" data-line-start="228" data-line-end="229">✨ Public <code>LuaCordAPI</code> for JAR wrappers to load Lua plugins</li>
+<li class="has-line-data" data-line-start="229" data-line-end="230">✨ <strong>JAR plugins now show up in <code>/plugins</code> command!</strong></li>
+<li class="has-line-data" data-line-start="230" data-line-end="231">✨ 87% Kotlin rewrite - modern, maintainable codebase</li>
+<li class="has-line-data" data-line-start="231" data-line-end="233">✨ Improved error messages with download links</li>
+</ul>
+<p class="has-line-data" data-line-start="233" data-line-end="234"><strong>Technical:</strong></p>
+<ul>
+<li class="has-line-data" data-line-start="234" data-line-end="235">Rewritten in Kotlin (87% conversion)</li>
+<li class="has-line-data" data-line-start="235" data-line-end="236">Clean console logging (no more <code>[nz.co.jammehcow.lukkit...]</code> spam)</li>
+<li class="has-line-data" data-line-start="236" data-line-end="237">Package renamed to <code>io.thegamingmahi.luacord</code></li>
+<li class="has-line-data" data-line-start="237" data-line-end="238">Better error handling with stack management</li>
+<li class="has-line-data" data-line-start="238" data-line-end="240">JAR connector template for plugin distribution</li>
+</ul>
+<p class="has-line-data" data-line-start="240" data-line-end="241"><strong>Compatibility:</strong></p>
+<ul>
+<li class="has-line-data" data-line-start="241" data-line-end="242">100% backwards compatible with Lukkit plugins</li>
+<li class="has-line-data" data-line-start="242" data-line-end="243">Full Paper compatibility maintained</li>
+<li class="has-line-data" data-line-start="243" data-line-end="244">Works with any Spigot/Paper version</li>
+<li class="has-line-data" data-line-start="244" data-line-end="246">Java 8+</li>
+</ul>
+<p class="has-line-data" data-line-start="246" data-line-end="247"><strong>Inherited from Lukkit 2.2.0 (by TheGamingMahi):</strong></p>
+<ul>
+<li class="has-line-data" data-line-start="247" data-line-end="248">✅ Paper server compatibility fix</li>
+<li class="has-line-data" data-line-start="248" data-line-end="249">✅ Bypass mode for Paper’s plugin restrictions</li>
+<li class="has-line-data" data-line-start="249" data-line-end="250">✅ Configurable loading modes</li>
+<li class="has-line-data" data-line-start="250" data-line-end="252">✅ Debug mode for troubleshooting</li>
+</ul>
+<h3 class="code-line has-line-data" data-line-start="252" data-line-end="253"><a id="010BETA_252"></a>0.1.0-BETA</h3>
+<p class="has-line-data" data-line-start="254" data-line-end="255"><strong>Initial LuaCord release - forked from Lukkit 2.2.0</strong></p>
+<ul>
+<li class="has-line-data" data-line-start="256" data-line-end="257">✨ Rewritten in Kotlin</li>
+<li class="has-line-data" data-line-start="257" data-line-end="258">✨ Clean console logging</li>
+<li class="has-line-data" data-line-start="258" data-line-end="259">✨ Full Paper compatibility</li>
+<li class="has-line-data" data-line-start="259" data-line-end="260">✨ Package renamed to <code>io.thegamingmahi.luacord</code></li>
+<li class="has-line-data" data-line-start="260" data-line-end="262">✨ Improved error handling</li>
+</ul>
+<hr>
+<h2 class="code-line has-line-data" data-line-start="264" data-line-end="265"><a id="Roadmap_264"></a>🎯 Roadmap</h2>
+<h3 class="code-line has-line-data" data-line-start="266" data-line-end="267"><a id="030_Quality_of_Life_Update_266"></a>0.3.0 - Quality of Life Update</h3>
+<ul>
+<li class="has-line-data" data-line-start="267" data-line-end="268"><input type="checkbox" id="checkbox9"><label for="checkbox9"></label><strong>Command fixes</strong> - Fix and improve <code>/lukkit</code> commands (for the LuaCord core plugin itself)</li>
+<li class="has-line-data" data-line-start="268" data-line-end="269"><input type="checkbox" id="checkbox10"><label for="checkbox10"></label><strong>bStats integration</strong> - Built-in support for plugin developers to easily add bStats to their Lua plugins</li>
+<li class="has-line-data" data-line-start="269" data-line-end="270"><input type="checkbox" id="checkbox11"><label for="checkbox11"></label><strong>Basic LuaCord Wiki</strong> - Simple documentation with essential guides for plugin development</li>
+<li class="has-line-data" data-line-start="270" data-line-end="272"><input type="checkbox" id="checkbox12"><label for="checkbox12">More example plugins</label></li>
+</ul>
+<h3 class="code-line has-line-data" data-line-start="272" data-line-end="273"><a id="Future_Up_to_100_Stable_Release_272"></a>Future / Up to 1.0.0 - Stable Release</h3>
+<ul>
+<li class="has-line-data" data-line-start="273" data-line-end="274"><input type="checkbox" id="checkbox13"><label for="checkbox13">Complete Kotlin migration (100%)</label></li>
+<li class="has-line-data" data-line-start="274" data-line-end="275"><input type="checkbox" id="checkbox14"><label for="checkbox14">Extended Paper API implementations</label></li>
+<li class="has-line-data" data-line-start="275" data-line-end="276"><input type="checkbox" id="checkbox15"><label for="checkbox15">VSCode extension for Lua plugin development</label></li>
+<li class="has-line-data" data-line-start="276" data-line-end="277"><input type="checkbox" id="checkbox16"><label for="checkbox16">Plugin marketplace/repository</label></li>
+<li class="has-line-data" data-line-start="277" data-line-end="279"><input type="checkbox" id="checkbox17"><label for="checkbox17">Video tutorials</label></li>
+</ul>
+<hr>
+<h2 class="code-line has-line-data" data-line-start="281" data-line-end="282"><a id="License_281"></a>📜 License</h2>
+<p class="has-line-data" data-line-start="283" data-line-end="284"><strong>LuaCord Core:</strong> GPL v3 - This ensures the framework remains open source.</p>
+<p class="has-line-data" data-line-start="285" data-line-end="286"><strong>Plugin Wrapper Template (LuaCord-Connector):</strong> MIT - Maximum freedom for plugin developers.</p>
+<p class="has-line-data" data-line-start="287" data-line-end="288">See <a href="LICENSE">LICENSE</a> for details.</p>
+<hr>
+<h2 class="code-line has-line-data" data-line-start="291" data-line-end="292"><a id="Credits_291"></a>🙏 Credits</h2>
+<h3 class="code-line has-line-data" data-line-start="293" data-line-end="294"><a id="LuaCord_293"></a>LuaCord</h3>
+<ul>
+<li class="has-line-data" data-line-start="294" data-line-end="296"><strong>TheGamingMahi</strong> - Creator, Kotlin rewrite, Paper fix (Lukkit 2.2.0), JAR support, maintenance</li>
+</ul>
+<h3 class="code-line has-line-data" data-line-start="296" data-line-end="297"><a id="Original_Lukkit_Team_296"></a>Original Lukkit Team</h3>
+<ul>
+<li class="has-line-data" data-line-start="297" data-line-end="298">jammehcow</li>
+<li class="has-line-data" data-line-start="298" data-line-end="299">AL_1</li>
+<li class="has-line-data" data-line-start="299" data-line-end="300">mathhulk</li>
+<li class="has-line-data" data-line-start="300" data-line-end="302">ArtexDevelopment</li>
+</ul>
+<p class="has-line-data" data-line-start="302" data-line-end="303"><strong>Special thanks to the Lukkit community for keeping the project alive!</strong></p>
+<p class="has-line-data" data-line-start="304" data-line-end="305">Original Lukkit repository: <a href="https://github.com/jammehcow/Lukkit">https://github.com/jammehcow/Lukkit</a> (archived)</p>
+<hr>
+<h2 class="code-line has-line-data" data-line-start="308" data-line-end="309"><a id="Links_308"></a>🔗 Links</h2>
+<ul>
+<li class="has-line-data" data-line-start="310" data-line-end="311"><strong>Website:</strong> <a href="https://luacordmc.github.io">https://luacordmc.github.io</a></li>
+<li class="has-line-data" data-line-start="311" data-line-end="312"><strong>JAR Generator:</strong> <a href="https://luacordmc.github.io/generator.html">https://luacordmc.github.io/generator.html</a></li>
+<li class="has-line-data" data-line-start="312" data-line-end="313"><strong>Documentation:</strong> <a href="https://docs.lukkit.net">https://docs.lukkit.net</a> (Lukkit docs - LuaCord compatible)</li>
+<li class="has-line-data" data-line-start="313" data-line-end="314"><strong>Issues:</strong> <a href="https://github.com/TheGamingMahi/LuaCord/issues">https://github.com/TheGamingMahi/LuaCord/issues</a></li>
+<li class="has-line-data" data-line-start="314" data-line-end="315"><strong>CurseForge:</strong> <a href="https://www.curseforge.com/minecraft/bukkit-plugins/luacord">https://www.curseforge.com/minecraft/bukkit-plugins/luacord</a></li>
+<li class="has-line-data" data-line-start="315" data-line-end="317"><strong>Modrinth:</strong> <a href="https://modrinth.com/plugin/luacord">https://modrinth.com/plugin/luacord</a></li>
+</ul>
+<hr>
+<h2 class="code-line has-line-data" data-line-start="319" data-line-end="320"><a id="Support_319"></a>💬 Support</h2>
+<p class="has-line-data" data-line-start="321" data-line-end="322"><strong>Found a bug?</strong> Open an issue on <a href="https://github.com/TheGamingMahi/LuaCord/issues">GitHub Issues</a></p>
+<p class="has-line-data" data-line-start="323" data-line-end="324"><strong>Need help?</strong> Check the <a href="https://github.com/jammehcow/Lukkit/wiki">Lukkit Wiki</a> (LuaCord is backwards compatible)</p>
+<hr>
+<h2 class="code-line has-line-data" data-line-start="327" data-line-end="328"><a id="Important_Notes_327"></a>⚠️ Important Notes</h2>
+<ul>
+<li class="has-line-data" data-line-start="329" data-line-end="330">LuaCord is in <strong>BETA</strong> - expect bugs and potential breaking changes</li>
+<li class="has-line-data" data-line-start="330" data-line-end="331">This is a fork/continuation of the archived Lukkit project</li>
+<li class="has-line-data" data-line-start="331" data-line-end="332">Not affiliated with the original Lukkit developers</li>
+<li class="has-line-data" data-line-start="332" data-line-end="334">The original Lukkit repository is no longer maintained</li>
+</ul>
+<hr>
+<p class="has-line-data" data-line-start="336" data-line-end="337"><strong>Write plugins. Ship faster. LuaCord makes it easy.</strong> 🚀</p>
+
+</body>
+</html>
