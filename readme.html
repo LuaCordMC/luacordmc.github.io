@@ -32,9 +32,194 @@
 
 <!-- Optional favicon -->
 <link rel="icon" href="/static/favicon.ico">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap');
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        font-family: 'Inter', sans-serif;
+        background: #0a0a0a;
+    }
+
+    .gradient-text {
+        background: linear-gradient(135deg, #4A90E2 0%, #50E3C2 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    /* Mobile menu */
+    .mobile-menu {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease-out;
+    }
+
+    .mobile-menu.active {
+        max-height: 300px;
+    }
+
+    /* Markdown content styling, matched to the rest of the site */
+    .markdown-body h1 {
+        font-size: 2.75rem;
+        font-weight: 900;
+        margin: 0 0 1rem 0;
+    }
+
+    .markdown-body h2 {
+        font-size: 1.75rem;
+        font-weight: 700;
+        color: #fff;
+        margin: 3rem 0 1.25rem 0;
+        padding-top: 1.5rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .markdown-body h2:first-of-type {
+        border-top: none;
+        padding-top: 0;
+    }
+
+    .markdown-body h3 {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: #4A90E2;
+        margin: 2rem 0 0.75rem 0;
+    }
+
+    .markdown-body p {
+        color: #d1d5db;
+        line-height: 1.75;
+        margin: 0 0 1rem 0;
+    }
+
+    .markdown-body a {
+        color: #4A90E2;
+        text-decoration: none;
+        transition: color 0.2s;
+    }
+
+    .markdown-body a:hover {
+        color: #50E3C2;
+        text-decoration: underline;
+    }
+
+    .markdown-body ul, .markdown-body ol {
+        color: #d1d5db;
+        margin: 0 0 1.25rem 0;
+        padding-left: 1.5rem;
+        line-height: 1.75;
+    }
+
+    .markdown-body ul { list-style-type: disc; }
+    .markdown-body ol { list-style-type: decimal; }
+    .markdown-body li { margin: 0.35rem 0; }
+
+    .markdown-body s {
+        color: #6b7280;
+    }
+
+    .markdown-body strong {
+        color: #fff;
+        font-weight: 700;
+    }
+
+    .markdown-body hr {
+        border: none;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        margin: 2.5rem 0;
+    }
+
+    .markdown-body img {
+        max-width: 100%;
+        border-radius: 0.5rem;
+        margin: 0.5rem 0;
+    }
+
+    .markdown-body code {
+        background: #161616;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 0.35rem;
+        padding: 0.15rem 0.4rem;
+        font-family: 'JetBrains Mono', 'Fira Code', monospace;
+        font-size: 0.875em;
+        color: #50E3C2;
+    }
+
+    .markdown-body pre {
+        background: #161616;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 0.75rem;
+        padding: 1.25rem;
+        overflow-x: auto;
+        margin: 0 0 1.5rem 0;
+    }
+
+    .markdown-body pre code {
+        background: none;
+        border: none;
+        padding: 0;
+        color: #e5e7eb;
+        font-size: 0.875rem;
+        line-height: 1.6;
+    }
+
+    /* Syntax highlighting tokens (highlight.js classes from the markdown export) */
+    .markdown-body .hljs-keyword { color: #4A90E2; }
+    .markdown-body .hljs-string { color: #50E3C2; }
+    .markdown-body .hljs-number { color: #f0ad4e; }
+    .markdown-body .hljs-attr { color: #d19a66; }
+    .markdown-body .hljs-function { color: #e5e7eb; }
+    .markdown-body .hljs-params { color: #e5e7eb; }
+    .markdown-body .hljs-comment { color: #6b7280; font-style: italic; }
+    .markdown-body .hljs-title { color: #4A90E2; }
+</style>
 </head>
-<body id="preview">
-<h1 class="code-line has-line-data" data-line-start="0" data-line-end="1"><a id="LuaCord_0"></a>LuaCord</h1>
+<body id="preview" class="text-white">
+    <nav class="fixed top-0 w-full bg-black/50 backdrop-blur-md z-50 border-b border-white/10">
+        <div class="max-w-7xl mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <a href="index.html" class="flex items-center">
+                    <img src="static/logo.png" alt="LuaCord" class="w-10 h-10">
+                </a>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html#home" class="hover:text-blue-400 transition">Home</a>
+                    <a href="index.html#features" class="hover:text-blue-400 transition">Features</a>
+                    <a href="index.html#quickstart" class="hover:text-blue-400 transition">Quick Start</a>
+                    <a href="generator.html" class="hover:text-blue-400 transition">JAR Generator</a>
+                    <a href="readme.html" class="text-blue-400 transition">ReadMe</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobileMenuBtn" class="md:hidden text-white" aria-label="Toggle menu">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Mobile Menu -->
+            <div id="mobileMenu" class="mobile-menu md:hidden">
+                <div class="pt-4 pb-2 space-y-2">
+                    <a href="index.html#home" class="block py-2 hover:text-blue-400 transition">Home</a>
+                    <a href="index.html#features" class="block py-2 hover:text-blue-400 transition">Features</a>
+                    <a href="index.html#quickstart" class="block py-2 hover:text-blue-400 transition">Quick Start</a>
+                    <a href="generator.html" class="block py-2 hover:text-blue-400 transition">JAR Generator</a>
+                    <a href="readme.html" class="block py-2 text-blue-400 transition">ReadMe</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="markdown-body max-w-4xl mx-auto px-6 pt-32 pb-20">
+<h1 class="code-line has-line-data" data-line-start="0" data-line-end="1"><a id="LuaCord_0"></a><span class="gradient-text">LuaCord</span></h1>
 <p class="has-line-data" data-line-start="2" data-line-end="3"><strong>Write real Minecraft plugins in Lua.</strong></p>
 <p class="has-line-data" data-line-start="4" data-line-end="5">LuaCord is a modern fork of <a href="https://github.com/jammehcow/Lukkit">Lukkit</a>, rewritten in Kotlin (87%) with full Paper compatibility and extended API support. Create powerful Minecraft plugins using Lua scripting with access to the complete Spigot/Paper API.</p>
 <p class="has-line-data" data-line-start="6" data-line-end="9"><a href="https://www.gnu.org/licenses/gpl-3.0"><img src="https://img.shields.io/badge/License-GPLv3-blue.svg" alt="License: GPL v3"></a><br>
@@ -56,7 +241,7 @@
 <h2 class="code-line has-line-data" data-line-start="25" data-line-end="26"><a id="Installation_25"></a>📦 Installation</h2>
 <h3 class="code-line has-line-data" data-line-start="27" data-line-end="28"><a id="For_Server_Owners_27"></a>For Server Owners</h3>
 <ol>
-<li class="has-line-data" data-line-start="29" data-line-end="30">Download <code>LuaCord-0.2.0-BETA.jar</code></li>
+<li class="has-line-data" data-line-start="29" data-line-end="30">Download <code>LuaCord-0.2.5-BETA.jar</code></li>
 <li class="has-line-data" data-line-start="30" data-line-end="31">Place it in your server’s <code>/plugins/</code> folder</li>
 <li class="has-line-data" data-line-start="31" data-line-end="32">Place your <code>.lkt</code> or <code>.jar</code> plugin files in the same <code>/plugins/</code> folder</li>
 <li class="has-line-data" data-line-start="32" data-line-end="34">Start/restart your server</li>
@@ -136,7 +321,7 @@ plugin:registerEvent(<span class="hljs-string">&quot;PlayerJoinEvent&quot;</span
 <span class="hljs-comment"># Check for updates on startup</span>
 <span class="hljs-attr">update-checker:</span> <span class="hljs-literal">false</span>
 
-<span class="hljs-comment"># Allow /lukkit run command</span>
+<span class="hljs-comment"># Allow /luacord run command</span>
 <span class="hljs-attr">can-run-code:</span> <span class="hljs-literal">true</span>
 </code></pre>
 <p class="has-line-data" data-line-start="133" data-line-end="135"><strong>For Paper servers:</strong> Keep <code>bypass-plugin-registration: true</code><br>
@@ -144,13 +329,13 @@ plugin:registerEvent(<span class="hljs-string">&quot;PlayerJoinEvent&quot;</span
 <hr>
 <h2 class="code-line has-line-data" data-line-start="138" data-line-end="139"><a id="Commands_138"></a>📚 Commands</h2>
 <ul>
-<li class="has-line-data" data-line-start="140" data-line-end="141"><code>/lukkit</code> - Show help message</li>
-<li class="has-line-data" data-line-start="141" data-line-end="142"><code>/lukkit plugins</code> - List all loaded LuaCord plugins</li>
-<li class="has-line-data" data-line-start="142" data-line-end="143"><code>/lukkit dev</code> - Show developer commands</li>
-<li class="has-line-data" data-line-start="143" data-line-end="144"><code>/lukkit dev reload &lt;plugin&gt;</code> - Hot reload a dev plugin (folder-based plugins only)</li>
-<li class="has-line-data" data-line-start="144" data-line-end="145"><code>/lukkit dev errors</code> - View error stack for debugging</li>
-<li class="has-line-data" data-line-start="145" data-line-end="146"><code>/lukkit dev pack &lt;plugin&gt;</code> - Package a dev plugin folder into <code>.lkt</code></li>
-<li class="has-line-data" data-line-start="146" data-line-end="148"><code>/lukkit dev unpack &lt;plugin&gt;</code> - Unpack a <code>.lkt</code> into a folder for development</li>
+<li class="has-line-data" data-line-start="140" data-line-end="141"><code>/luacord</code> - Show help message</li>
+<li class="has-line-data" data-line-start="141" data-line-end="142"><code>/luacord plugins</code> - List all loaded LuaCord plugins</li>
+<li class="has-line-data" data-line-start="142" data-line-end="143"><code>/luacord dev</code> - Show developer commands</li>
+<li class="has-line-data" data-line-start="143" data-line-end="144"><code>/luacord dev reload &lt;plugin&gt;</code> - Hot reload a dev plugin (folder-based plugins only)</li>
+<li class="has-line-data" data-line-start="144" data-line-end="145"><code>/luacord dev errors</code> - View error stack for debugging</li>
+<li class="has-line-data" data-line-start="145" data-line-end="146"><code>/luacord dev pack &lt;plugin&gt;</code> - Package a dev plugin folder into <code>.lkt</code></li>
+<li class="has-line-data" data-line-start="146" data-line-end="148"><code>/luacord dev unpack &lt;plugin&gt;</code> - Unpack a <code>.lkt</code> into a folder for development</li>
 </ul>
 <hr>
 <h2 class="code-line has-line-data" data-line-start="150" data-line-end="151"><a id="Plugin_API_150"></a>🔌 Plugin API</h2>
@@ -213,7 +398,20 @@ logger:severe(<span class="hljs-string">&quot;message&quot;</span>)
 <p class="has-line-data" data-line-start="215" data-line-end="216"><strong>Note:</strong> <code>.lkt</code> files still don’t show in <code>/plugins</code> due to bypass mode. Use JAR plugins for better compatibility.</p>
 <hr>
 <h2 class="code-line has-line-data" data-line-start="219" data-line-end="220"><a id="Changelog_219"></a>📝 Changelog</h2>
-<h3 class="code-line has-line-data" data-line-start="221" data-line-end="222"><a id="020BETA_Current_221"></a>0.2.0-BETA <em>(Current)</em></h3>
+<h3 class="code-line has-line-data" data-line-start="221" data-line-end="222"><a id="025BETA_Current_221"></a>0.2.5-BETA <em>(Current)</em></h3>
+<p class="has-line-data" data-line-start="223" data-line-end="224"><strong>Stability &amp; Rebrand Update</strong></p>
+<p class="has-line-data" data-line-start="225" data-line-end="226"><strong>Bug Fixes:</strong></p>
+<ul>
+<li class="has-line-data" data-line-start="226" data-line-end="227">🐛 Fixed a bug where one <code>.lkt</code> plugin failing to load (e.g. a bad <code>main:</code> path) could silently prevent every plugin listed after it in the plugins folder from loading at all — each plugin now loads independently</li>
+<li class="has-line-data" data-line-start="227" data-line-end="228">🐛 Fixed a double-enable race where a JAR-wrapped plugin could have its Lua half enabled twice (double-registering all its event listeners) if it enabled before LuaCord's own <code>onEnable()</code> ran</li>
+<li class="has-line-data" data-line-start="228" data-line-end="230">🐛 Fixed the JAR generator producing malformed <code>plugin.yml</code> (and therefore a JAR that silently fails to load) if the description field contained a colon, <code>#</code>, quote, or line break</li>
+</ul>
+<p class="has-line-data" data-line-start="230" data-line-end="231"><strong>Changes:</strong></p>
+<ul>
+<li class="has-line-data" data-line-start="231" data-line-end="232">🔄 Renamed the <code>/lukkit</code> command to <code>/luacord</code> (and permissions <code>lukkit.command</code>/<code>lukkit.run</code> to <code>luacord.command</code>/<code>luacord.run</code>) to match the project's actual name — <strong>you'll need to re-grant these permissions if you assigned them explicitly</strong></li>
+<li class="has-line-data" data-line-start="232" data-line-end="234">🔄 Connector template now declares <code>softdepend: [LuaCord]</code> so it reliably enables after LuaCord instead of relying on undefined plugin load order</li>
+</ul>
+<h3 class="code-line has-line-data" data-line-start="234" data-line-end="235"><a id="020BETA_235"></a>0.2.0-BETA</h3>
 <p class="has-line-data" data-line-start="223" data-line-end="224"><strong>JAR Support Release - The Distribution Update</strong></p>
 <p class="has-line-data" data-line-start="225" data-line-end="226"><strong>New Features:</strong></p>
 <ul>
@@ -239,6 +437,8 @@ logger:severe(<span class="hljs-string">&quot;message&quot;</span>)
 <li class="has-line-data" data-line-start="243" data-line-end="244">Works with any Spigot/Paper version</li>
 <li class="has-line-data" data-line-start="244" data-line-end="246">Java 8+</li>
 </ul>
+<h3 class="code-line has-line-data" data-line-start="252" data-line-end="253"><a id="010BETA_252"></a>0.1.0-BETA</h3>
+<p class="has-line-data" data-line-start="254" data-line-end="255"><strong>Initial LuaCord release - forked from Lukkit 2.2.0</strong></p>
 <p class="has-line-data" data-line-start="246" data-line-end="247"><strong>Inherited from Lukkit 2.2.0 (by TheGamingMahi):</strong></p>
 <ul>
 <li class="has-line-data" data-line-start="247" data-line-end="248">✅ Paper server compatibility fix</li>
@@ -246,8 +446,6 @@ logger:severe(<span class="hljs-string">&quot;message&quot;</span>)
 <li class="has-line-data" data-line-start="249" data-line-end="250">✅ Configurable loading modes</li>
 <li class="has-line-data" data-line-start="250" data-line-end="252">✅ Debug mode for troubleshooting</li>
 </ul>
-<h3 class="code-line has-line-data" data-line-start="252" data-line-end="253"><a id="010BETA_252"></a>0.1.0-BETA</h3>
-<p class="has-line-data" data-line-start="254" data-line-end="255"><strong>Initial LuaCord release - forked from Lukkit 2.2.0</strong></p>
 <ul>
 <li class="has-line-data" data-line-start="256" data-line-end="257">✨ Rewritten in Kotlin</li>
 <li class="has-line-data" data-line-start="257" data-line-end="258">✨ Clean console logging</li>
@@ -259,7 +457,7 @@ logger:severe(<span class="hljs-string">&quot;message&quot;</span>)
 <h2 class="code-line has-line-data" data-line-start="264" data-line-end="265"><a id="Roadmap_264"></a>🎯 Roadmap</h2>
 <h3 class="code-line has-line-data" data-line-start="266" data-line-end="267"><a id="030_Quality_of_Life_Update_266"></a>0.3.0 - Quality of Life Update</h3>
 <ul>
-<li class="has-line-data" data-line-start="267" data-line-end="268"><input type="checkbox" id="checkbox9"><label for="checkbox9"></label><strong>Command fixes</strong> - Fix and improve <code>/lukkit</code> commands (for the LuaCord core plugin itself)</li>
+<li class="has-line-data" data-line-start="267" data-line-end="268"><input type="checkbox" id="checkbox9"><label for="checkbox9"></label><strong>Command fixes</strong> - Fix and improve <code>/luacord</code> commands (for the LuaCord core plugin itself)</li>
 <li class="has-line-data" data-line-start="268" data-line-end="269"><input type="checkbox" id="checkbox10"><label for="checkbox10"></label><strong>bStats integration</strong> - Built-in support for plugin developers to easily add bStats to their Lua plugins</li>
 <li class="has-line-data" data-line-start="269" data-line-end="270"><input type="checkbox" id="checkbox11"><label for="checkbox11"></label><strong>Basic LuaCord Wiki</strong> - Simple documentation with essential guides for plugin development</li>
 <li class="has-line-data" data-line-start="270" data-line-end="272"><input type="checkbox" id="checkbox12"><label for="checkbox12">More example plugins</label></li>
@@ -281,7 +479,7 @@ logger:severe(<span class="hljs-string">&quot;message&quot;</span>)
 <h2 class="code-line has-line-data" data-line-start="291" data-line-end="292"><a id="Credits_291"></a>🙏 Credits</h2>
 <h3 class="code-line has-line-data" data-line-start="293" data-line-end="294"><a id="LuaCord_293"></a>LuaCord</h3>
 <ul>
-<li class="has-line-data" data-line-start="294" data-line-end="296"><strong>TheGamingMahi</strong> - Creator, Kotlin rewrite, Paper fix (Lukkit 2.2.0), JAR support, maintenance</li>
+<li class="has-line-data" data-line-start="294" data-line-end="296"><strong>TheGamingMahi</strong> - Forked the original Lukkit into Lukkit 2.2.0 (Paper compatibility fix, bypass mode), then forked Lukkit 2.2.0 into LuaCord (Kotlin rewrite, JAR support, maintenance)</li>
 </ul>
 <h3 class="code-line has-line-data" data-line-start="296" data-line-end="297"><a id="Original_Lukkit_Team_296"></a>Original Lukkit Team</h3>
 <ul>
@@ -317,5 +515,22 @@ logger:severe(<span class="hljs-string">&quot;message&quot;</span>)
 <hr>
 <p class="has-line-data" data-line-start="336" data-line-end="337"><strong>Write plugins. Ship faster. LuaCord makes it easy.</strong> 🚀</p>
 
+    </div>
+
+    <script>
+        // Mobile Menu
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+        });
+
+        document.querySelectorAll('#mobileMenu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+            });
+        });
+    </script>
 </body>
 </html>

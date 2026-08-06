@@ -187,7 +187,7 @@
                 <!-- Beta badge -->
                 <div class="inline-flex items-center gap-2 bg-blue-500/10 border border-blue-500/30 rounded-full px-4 py-1.5 mb-6">
                     <div style="width:8px;height:8px;border-radius:50%;background:#4A90E2;box-shadow:0 0 6px 2px rgba(74,144,226,0.6);"></div>
-                    <span class="text-xs font-semibold text-blue-400 tracking-widest uppercase">LuaCord 0.2.0 BETA</span>
+                    <span class="text-xs font-semibold text-blue-400 tracking-widest uppercase">LuaCord 0.2.5 BETA</span>
                 </div>
                 <h1 class="text-5xl md:text-6xl font-black mb-4">
                     <span class="gradient-text">JAR Generator</span>
@@ -392,7 +392,7 @@
                 <div>
                     <h4 class="font-bold text-lg mb-4 gradient-text">LuaCord</h4>
                     <p class="text-gray-400 text-sm">
-                        Modern Minecraft plugin framework using Lua. Forked from Lukkit with full Paper compatibility. Currently in <span class="text-blue-400 font-semibold">0.2.0 BETA</span>.
+                        Modern Minecraft plugin framework using Lua. Forked from Lukkit with full Paper compatibility. Currently in <span class="text-blue-400 font-semibold">0.2.5 BETA</span>.
                     </p>
                 </div>
                 <div>
@@ -423,6 +423,18 @@
         function sanitizeFilename(name) {
             // Remove invalid filename characters
             return name.replace(/[<>:"/\\|?*\x00-\x1F]/g, '').trim();
+        }
+
+        function yamlQuote(value) {
+            // Safely embed a user-supplied string as a YAML double-quoted scalar.
+            // Escapes backslashes/quotes and collapses real newlines (the description
+            // field is a <textarea>) so the value can never break plugin.yml's structure.
+            const escaped = value
+                .replace(/\\/g, '\\\\')
+                .replace(/"/g, '\\"')
+                .replace(/\r\n|\r|\n/g, ' ')
+                .trim();
+            return `"${escaped}"`;
         }
         
         function showError(inputId, message) {
@@ -460,6 +472,67 @@
         
         fileUpload.addEventListener('click', () => fileInput.click());
         
+        // Minimal parser for the small, flat plugin.yml format LuaCord uses
+        // (name/version/author/description as single-line scalars). Not a
+        // general YAML parser - just enough to read these four fields back
+        // out of a .lkt the person already has, for autofill.
+        function parseSimplePluginYaml(text) {
+            const result = {};
+            text.split(/\r?\n/).forEach(line => {
+                const trimmed = line.trim();
+                if (!trimmed || trimmed.startsWith('#')) return;
+
+                const match = trimmed.match(/^([A-Za-z0-9_-]+):\s*(.*)$/);
+                if (!match) return;
+
+                const key = match[1].toLowerCase();
+                let value = match[2].trim();
+
+                if ((value.startsWith('"') && value.endsWith('"')) ||
+                    (value.startsWith("'") && value.endsWith("'"))) {
+                    // Quoted scalar - strip the quotes and unescape
+                    value = value.slice(1, -1).replace(/\\"/g, '"').replace(/\\\\/g, '\\');
+                } else {
+                    // Unquoted - drop a trailing ' # comment' if present
+                    const hashIndex = value.indexOf(' #');
+                    if (hashIndex !== -1) value = value.slice(0, hashIndex).trim();
+                }
+
+                result[key] = value;
+            });
+            return result;
+        }
+
+        async function autofillFromLkt(file) {
+            try {
+                const zip = await JSZip.loadAsync(file);
+                const ymlEntry = zip.file('plugin.yml');
+                if (!ymlEntry) return;
+
+                const data = parseSimplePluginYaml(await ymlEntry.async('string'));
+
+                const fieldMap = {
+                    pluginName: data.name,
+                    version: data.version,
+                    author: data.author,
+                    description: data.description
+                };
+
+                Object.entries(fieldMap).forEach(([id, value]) => {
+                    if (!value) return;
+                    const el = document.getElementById(id);
+                    // Only fill fields the person hasn't already typed into
+                    if (el && !el.value.trim()) {
+                        el.value = id === 'pluginName' ? sanitizeFilename(value) : value;
+                    }
+                });
+            } catch (err) {
+                // Autofill is a nicety, not a requirement - if the .lkt has
+                // no readable plugin.yml, just leave the form as-is.
+                console.warn('Could not autofill from plugin.yml:', err);
+            }
+        }
+
         fileInput.addEventListener('change', (e) => {
             clearError('lktFile');
             if (e.target.files.length > 0) {
@@ -471,6 +544,11 @@
                 fileSize.textContent = formatFileSize(file.size);
                 uploadPrompt.classList.add('hidden');
                 uploadSuccess.classList.remove('hidden');
+
+                // Try to autofill any still-empty form fields from the
+                // uploaded .lkt's own plugin.yml. Never overwrites a field
+                // the person already typed something into.
+                autofillFromLkt(file);
             }
         });
         
@@ -607,11 +685,14 @@
                 console.log('Modifying plugin.yml...');
                 let pluginYml = await zip.file('plugin.yml').async('string');
                 
-                // Replace placeholders
-                pluginYml = pluginYml.replace('PluginNamePlaceholder', pluginName);
-                pluginYml = pluginYml.replace('VersionPlaceholder', version);
-                pluginYml = pluginYml.replace('AuthorPlaceholder', author);
-                pluginYml = pluginYml.replace('DescriptionPlaceholder', description);
+                // Replace placeholders. Values are YAML-escaped and double-quoted so that
+                // colons, '#', quotes, or newlines (the description is a <textarea>, so
+                // users can type multi-line text) can't break the YAML structure and cause
+                // Bukkit to throw InvalidDescriptionException when it loads the generated JAR.
+                pluginYml = pluginYml.replace('PluginNamePlaceholder', yamlQuote(pluginName));
+                pluginYml = pluginYml.replace('VersionPlaceholder', yamlQuote(version));
+                pluginYml = pluginYml.replace('AuthorPlaceholder', yamlQuote(author));
+                pluginYml = pluginYml.replace('DescriptionPlaceholder', yamlQuote(description));
                 
                 // Write modified plugin.yml back
                 zip.file('plugin.yml', pluginYml);

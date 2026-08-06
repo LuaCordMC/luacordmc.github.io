@@ -27,7 +27,7 @@ LuaCord is a modern fork of [Lukkit](https://github.com/jammehcow/Lukkit), rewri
 
 ### For Server Owners
 
-1. Download `LuaCord-0.2.0-BETA.jar`
+1. Download `LuaCord-0.2.5-BETA.jar`
 2. Place it in your server's `/plugins/` folder
 3. Place your `.lkt` or `.jar` plugin files in the same `/plugins/` folder
 4. Start/restart your server
@@ -127,7 +127,7 @@ lua-debug: false
 # Check for updates on startup
 update-checker: false
 
-# Allow /lukkit run command
+# Allow /luacord run command
 can-run-code: true
 ```
 
@@ -138,13 +138,13 @@ can-run-code: true
 
 ## 📚 Commands
 
-- `/lukkit` - Show help message
-- `/lukkit plugins` - List all loaded LuaCord plugins
-- `/lukkit dev` - Show developer commands
-- `/lukkit dev reload <plugin>` - Hot reload a dev plugin (folder-based plugins only)
-- `/lukkit dev errors` - View error stack for debugging
-- `/lukkit dev pack <plugin>` - Package a dev plugin folder into `.lkt`
-- `/lukkit dev unpack <plugin>` - Unpack a `.lkt` into a folder for development
+- `/luacord` - Show help message
+- `/luacord plugins` - List all loaded LuaCord plugins
+- `/luacord dev` - Show developer commands
+- `/luacord dev reload <plugin>` - Hot reload a dev plugin (folder-based plugins only)
+- `/luacord dev errors` - View error stack for debugging
+- `/luacord dev pack <plugin>` - Package a dev plugin folder into `.lkt`
+- `/luacord dev unpack <plugin>` - Unpack a `.lkt` into a folder for development
 
 ---
 
@@ -219,7 +219,20 @@ When using `bypass-plugin-registration: true` (Paper mode):
 
 ## 📝 Changelog
 
-### 0.2.0-BETA *(Current)*
+### 0.2.5-BETA *(Current)*
+
+**Stability & Rebrand Update**
+
+**Bug Fixes:**
+- 🐛 Fixed a bug where one `.lkt` plugin failing to load (e.g. a bad `main:` path) could silently prevent every plugin listed after it in the plugins folder from loading at all — each plugin now loads independently
+- 🐛 Fixed a double-enable race where a JAR-wrapped plugin could have its Lua half enabled twice (double-registering all its event listeners) if it enabled before LuaCord's own `onEnable()` ran
+- 🐛 Fixed the JAR generator producing malformed `plugin.yml` (and therefore a JAR that silently fails to load) if the description field contained a colon, `#`, quote, or line break
+
+**Changes:**
+- 🔄 Renamed the `/lukkit` command to `/luacord` (and permissions `lukkit.command`/`lukkit.run` to `luacord.command`/`luacord.run`) to match the project's actual name — **you'll need to re-grant these permissions if you assigned them explicitly**
+- 🔄 Connector template now declares `softdepend: [LuaCord]` so it reliably enables after LuaCord instead of relying on undefined plugin load order
+
+### 0.2.0-BETA
 
 **JAR Support Release - The Distribution Update**
 
@@ -244,15 +257,15 @@ When using `bypass-plugin-registration: true` (Paper mode):
 - Works with any Spigot/Paper version
 - Java 8+
 
+### 0.1.0-BETA
+
+**Initial LuaCord release - forked from Lukkit 2.2.0**
+
 **Inherited from Lukkit 2.2.0 (by TheGamingMahi):**
 - ✅ Paper server compatibility fix
 - ✅ Bypass mode for Paper's plugin restrictions
 - ✅ Configurable loading modes
 - ✅ Debug mode for troubleshooting
-
-### 0.1.0-BETA
-
-**Initial LuaCord release - forked from Lukkit 2.2.0**
 
 - ✨ Rewritten in Kotlin
 - ✨ Clean console logging
@@ -265,7 +278,7 @@ When using `bypass-plugin-registration: true` (Paper mode):
 ## 🎯 Roadmap
 
 ### 0.3.0 - Quality of Life Update
-- [ ] **Command fixes** - Fix and improve `/lukkit` commands (for the LuaCord core plugin itself)
+- [ ] **Command fixes** - Fix and improve `/luacord` commands (for the LuaCord core plugin itself)
 - [ ] **bStats integration** - Built-in support for plugin developers to easily add bStats to their Lua plugins
 - [ ] **Basic LuaCord Wiki** - Simple documentation with essential guides for plugin development
 - [ ] More example plugins
@@ -292,7 +305,7 @@ See [LICENSE](LICENSE) for details.
 ## 🙏 Credits
 
 ### LuaCord
-- **TheGamingMahi** - Creator, Kotlin rewrite, Paper fix (Lukkit 2.2.0), JAR support, maintenance
+- **TheGamingMahi** - Forked the original Lukkit into Lukkit 2.2.0 (Paper compatibility fix, bypass mode), then forked Lukkit 2.2.0 into LuaCord (Kotlin rewrite, JAR support, maintenance)
 
 ### Original Lukkit Team
 - jammehcow
