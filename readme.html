@@ -141,6 +141,19 @@
         margin: 0.5rem 0;
     }
 
+    /* Shield.io badge row (License / Spigot / Paper) - inline, not stacked */
+    .markdown-body .badge-row {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .markdown-body .badge-row img {
+        margin: 0;
+        border-radius: 0.25rem;
+    }
+
     .markdown-body code {
         background: #161616;
         border: 1px solid rgba(255, 255, 255, 0.1);
@@ -222,8 +235,8 @@
 <h1 class="code-line has-line-data" data-line-start="0" data-line-end="1"><a id="LuaCord_0"></a><span class="gradient-text">LuaCord</span></h1>
 <p class="has-line-data" data-line-start="2" data-line-end="3"><strong>Write real Minecraft plugins in Lua.</strong></p>
 <p class="has-line-data" data-line-start="4" data-line-end="5">LuaCord is a modern fork of <a href="https://github.com/jammehcow/Lukkit">Lukkit</a>, rewritten in Kotlin (87%) with full Paper compatibility and extended API support. Create powerful Minecraft plugins using Lua scripting with access to the complete Spigot/Paper API.</p>
-<p class="has-line-data" data-line-start="6" data-line-end="9"><a href="https://www.gnu.org/licenses/gpl-3.0"><img src="https://img.shields.io/badge/License-GPLv3-blue.svg" alt="License: GPL v3"></a><br>
-<a href="https://www.spigotmc.org/"><img src="https://img.shields.io/badge/Spigot-Compatible-orange.svg" alt="Spigot"></a><br>
+<p class="badge-row has-line-data" data-line-start="6" data-line-end="9"><a href="https://www.gnu.org/licenses/gpl-3.0"><img src="https://img.shields.io/badge/License-GPLv3-blue.svg" alt="License: GPL v3"></a>
+<a href="https://www.spigotmc.org/"><img src="https://img.shields.io/badge/Spigot-Compatible-orange.svg" alt="Spigot"></a>
 <a href="https://papermc.io/"><img src="https://img.shields.io/badge/Paper-Compatible-blue.svg" alt="Paper"></a></p>
 <hr>
 <h2 class="code-line has-line-data" data-line-start="12" data-line-end="13"><a id="Features_12"></a>🎯 Features</h2>
