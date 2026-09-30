@@ -254,7 +254,7 @@
 <h2 class="code-line has-line-data" data-line-start="25" data-line-end="26"><a id="Installation_25"></a>📦 Installation</h2>
 <h3 class="code-line has-line-data" data-line-start="27" data-line-end="28"><a id="For_Server_Owners_27"></a>For Server Owners</h3>
 <ol>
-<li class="has-line-data" data-line-start="29" data-line-end="30">Download <code>LuaCord-0.2.5-BETA.jar</code></li>
+<li class="has-line-data" data-line-start="29" data-line-end="30">Download <code>LuaCord-0.2.6-BETA.jar</code></li>
 <li class="has-line-data" data-line-start="30" data-line-end="31">Place it in your server’s <code>/plugins/</code> folder</li>
 <li class="has-line-data" data-line-start="31" data-line-end="32">Place your <code>.lkt</code> or <code>.jar</code> plugin files in the same <code>/plugins/</code> folder</li>
 <li class="has-line-data" data-line-start="32" data-line-end="34">Start/restart your server</li>
@@ -411,7 +411,19 @@ logger:severe(<span class="hljs-string">&quot;message&quot;</span>)
 <p class="has-line-data" data-line-start="215" data-line-end="216"><strong>Note:</strong> <code>.lkt</code> files still don’t show in <code>/plugins</code> due to bypass mode. Use JAR plugins for better compatibility.</p>
 <hr>
 <h2 class="code-line has-line-data" data-line-start="219" data-line-end="220"><a id="Changelog_219"></a>📝 Changelog</h2>
-<h3 class="code-line has-line-data" data-line-start="221" data-line-end="222"><a id="025BETA_Current_221"></a>0.2.5-BETA <em>(Current)</em></h3>
+<h3 class="code-line has-line-data" data-line-start="221" data-line-end="222"><a id="026BETA_Current_221"></a>0.2.6-BETA <em>(Current)</em></h3>
+<p class="has-line-data" data-line-start="223" data-line-end="224"><strong>Packaging Fix</strong></p>
+<p class="has-line-data" data-line-start="225" data-line-end="226"><strong>Bug Fixes:</strong></p>
+<ul>
+<li class="has-line-data" data-line-start="226" data-line-end="228">🐛 Fixed the jar bundling unrelated Maven build libraries (Plexus Utils and the Maven compiler plugin's dependencies), which caused 0.2.5 to be rejected by CurseForge moderation</li>
+</ul>
+<p class="has-line-data" data-line-start="228" data-line-end="229"><strong>Changes:</strong></p>
+<ul>
+<li class="has-line-data" data-line-start="229" data-line-end="230">🔄 Removed unused dependencies (<code>reflections</code>, <code>ebean</code>)</li>
+<li class="has-line-data" data-line-start="230" data-line-end="231">🔄 Jar size reduced from about 12 MB to about 4 MB</li>
+<li class="has-line-data" data-line-start="231" data-line-end="233">🔄 No changes to the Lua API or plugin behavior - existing <code>.lkt</code> and <code>.jar</code> plugins work as before</li>
+</ul>
+<h3 class="code-line has-line-data" data-line-start="234" data-line-end="235"><a id="025BETA_221"></a>0.2.5-BETA</h3>
 <p class="has-line-data" data-line-start="223" data-line-end="224"><strong>Stability &amp; Rebrand Update</strong></p>
 <p class="has-line-data" data-line-start="225" data-line-end="226"><strong>Bug Fixes:</strong></p>
 <ul>
