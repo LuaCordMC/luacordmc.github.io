@@ -74,20 +74,20 @@ Creating Your First Plugin
 
 main.lua:
 
-    plugin:onEnable(function()
-        logger:info("My plugin is enabled!")
+    plugin.onEnable(function()
+        logger.info("My plugin is enabled!")
     end)
 
-    plugin:addCommand({
+    plugin.addCommand({
         name = "hello",
         description = "Say hello!",
         usage = "/hello"
     }, function(event)
-        local sender = event:getSender()
+        local sender = event.getSender()
         sender:sendMessage("Hello from Lua!")
     end)
 
-    plugin:registerEvent("PlayerJoinEvent", function(event)
+    plugin.registerEvent("PlayerJoinEvent", function(event)
         local player = event:getPlayer()
         player:sendMessage("Welcome to the server!")
     end)
@@ -149,30 +149,32 @@ For Spigot servers: You can set it to false
 🔌 Plugin API
 
     -- Lifecycle hooks
-    plugin:onLoad(function() end)
-    plugin:onEnable(function() end)
-    plugin:onDisable(function() end)
+    plugin.onLoad(function() end)
+    plugin.onEnable(function() end)
+    plugin.onDisable(function() end)
 
     -- Commands
-    plugin:addCommand({ name = "cmd", ... }, function(event) end)
+    plugin.addCommand({ name = "cmd", ... }, function(event) end)
 
     -- Events
-    plugin:registerEvent("EventName", function(event) end)
+    plugin.registerEvent("EventName", function(event) end)
 
     -- Server access
-    local server = plugin:getServer()
+    local server = plugin.getServer()
 
-    -- Config
+    -- Storage (YAML or JSON files)
+    local config = plugin.getStorageObject("config.yml")
     config:getValue("path")
-    config:set("path", value)
+    config:setValue("path", value)
     config:save()
 
     -- Logging
-    logger:info("message")
-    logger:warn("message")
-    logger:severe("message")
+    logger.info("message")
+    logger.warn("message")
+    logger.severe("message")
+    logger.debug("message")
 
-For full API documentation, see the Lukkit Wiki (LuaCord is backwards
+For full API documentation, see the Lukkit Docs (LuaCord is backwards
 compatible).
 
 ------------------------------------------------------------------------
@@ -357,7 +359,7 @@ Original Lukkit repository: https://github.com/jammehcow/Lukkit
 
 Found a bug? Open an issue on GitHub Issues
 
-Need help? Check the Lukkit Wiki (LuaCord is backwards compatible)
+Need help? Check the Lukkit Docs (LuaCord is backwards compatible)
 
 ------------------------------------------------------------------------
 

@@ -291,20 +291,20 @@
 </code></pre>
 <h3 class="code-line has-line-data" data-line-start="71" data-line-end="72"><a id="Creating_Your_First_Plugin_71"></a>Creating Your First Plugin</h3>
 <p class="has-line-data" data-line-start="73" data-line-end="74"><strong>main.lua:</strong></p>
-<pre><code class="has-line-data language-lua" data-line-start="76" data-line-end="94">plugin:onEnable(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span></span>
-    logger:info(<span class="hljs-string">&quot;My plugin is enabled!&quot;</span>)
+<pre><code class="has-line-data language-lua" data-line-start="76" data-line-end="94">plugin.onEnable(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span></span>
+    logger.info(<span class="hljs-string">&quot;My plugin is enabled!&quot;</span>)
 <span class="hljs-keyword">end</span>)
 
-plugin:addCommand({
+plugin.addCommand({
     name = <span class="hljs-string">&quot;hello&quot;</span>,
     description = <span class="hljs-string">&quot;Say hello!&quot;</span>,
     usage = <span class="hljs-string">&quot;/hello&quot;</span>
 }, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(event)</span></span>
-    <span class="hljs-keyword">local</span> sender = event:getSender()
+    <span class="hljs-keyword">local</span> sender = event.getSender()
     sender:sendMessage(<span class="hljs-string">&quot;Hello from Lua!&quot;</span>)
 <span class="hljs-keyword">end</span>)
 
-plugin:registerEvent(<span class="hljs-string">&quot;PlayerJoinEvent&quot;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(event)</span></span>
+plugin.registerEvent(<span class="hljs-string">&quot;PlayerJoinEvent&quot;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(event)</span></span>
     <span class="hljs-keyword">local</span> player = event:getPlayer()
     player:sendMessage(<span class="hljs-string">&quot;Welcome to the server!&quot;</span>)
 <span class="hljs-keyword">end</span>)
@@ -354,30 +354,32 @@ plugin:registerEvent(<span class="hljs-string">&quot;PlayerJoinEvent&quot;</span
 <hr>
 <h2 class="code-line has-line-data" data-line-start="150" data-line-end="151"><a id="Plugin_API_150"></a><img src="static/emoji/electric-plug.png" alt="🔌" class="emoji"> Plugin API</h2>
 <pre><code class="has-line-data language-lua" data-line-start="153" data-line-end="177"><span class="hljs-comment">-- Lifecycle hooks</span>
-plugin:onLoad(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span></span> <span class="hljs-keyword">end</span>)
-plugin:onEnable(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span></span> <span class="hljs-keyword">end</span>)
-plugin:onDisable(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span></span> <span class="hljs-keyword">end</span>)
+plugin.onLoad(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span></span> <span class="hljs-keyword">end</span>)
+plugin.onEnable(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span></span> <span class="hljs-keyword">end</span>)
+plugin.onDisable(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span></span> <span class="hljs-keyword">end</span>)
 
 <span class="hljs-comment">-- Commands</span>
-plugin:addCommand({ name = <span class="hljs-string">&quot;cmd&quot;</span>, ... }, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(event)</span></span> <span class="hljs-keyword">end</span>)
+plugin.addCommand({ name = <span class="hljs-string">&quot;cmd&quot;</span>, ... }, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(event)</span></span> <span class="hljs-keyword">end</span>)
 
 <span class="hljs-comment">-- Events</span>
-plugin:registerEvent(<span class="hljs-string">&quot;EventName&quot;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(event)</span></span> <span class="hljs-keyword">end</span>)
+plugin.registerEvent(<span class="hljs-string">&quot;EventName&quot;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(event)</span></span> <span class="hljs-keyword">end</span>)
 
 <span class="hljs-comment">-- Server access</span>
-<span class="hljs-keyword">local</span> server = plugin:getServer()
+<span class="hljs-keyword">local</span> server = plugin.getServer()
 
-<span class="hljs-comment">-- Config</span>
-<span class="hljs-built_in">config</span>:getValue(<span class="hljs-string">&quot;path&quot;</span>)
-<span class="hljs-built_in">config</span>:set(<span class="hljs-string">&quot;path&quot;</span>, value)
-<span class="hljs-built_in">config</span>:save()
+<span class="hljs-comment">-- Storage (YAML or JSON files)</span>
+<span class="hljs-keyword">local</span> config = plugin.getStorageObject(<span class="hljs-string">&quot;config.yml&quot;</span>)
+config:getValue(<span class="hljs-string">&quot;path&quot;</span>)
+config:setValue(<span class="hljs-string">&quot;path&quot;</span>, value)
+config:save()
 
 <span class="hljs-comment">-- Logging</span>
-logger:info(<span class="hljs-string">&quot;message&quot;</span>)
-logger:warn(<span class="hljs-string">&quot;message&quot;</span>)
-logger:severe(<span class="hljs-string">&quot;message&quot;</span>)
+logger.info(<span class="hljs-string">&quot;message&quot;</span>)
+logger.warn(<span class="hljs-string">&quot;message&quot;</span>)
+logger.severe(<span class="hljs-string">&quot;message&quot;</span>)
+logger.debug(<span class="hljs-string">&quot;message&quot;</span>)
 </code></pre>
-<p class="has-line-data" data-line-start="178" data-line-end="179">For full API documentation, see the <a href="https://github.com/jammehcow/Lukkit/wiki">Lukkit Wiki</a> (LuaCord is backwards compatible).</p>
+<p class="has-line-data" data-line-start="178" data-line-end="179">For full API documentation, see the <a href="https://docs.lukkit.net">Lukkit Docs</a> (LuaCord is backwards compatible).</p>
 <hr>
 <h2 class="code-line has-line-data" data-line-start="182" data-line-end="183"><a id="JAR_Distribution_182"></a><img src="static/emoji/package.png" alt="📦" class="emoji"> JAR Distribution</h2>
 <h3 class="code-line has-line-data" data-line-start="184" data-line-end="185"><a id="Why_JAR_Support_184"></a>Why JAR Support?</h3>
@@ -529,7 +531,7 @@ logger:severe(<span class="hljs-string">&quot;message&quot;</span>)
 <hr>
 <h2 class="code-line has-line-data" data-line-start="319" data-line-end="320"><a id="Support_319"></a><img src="static/emoji/speech-balloon.png" alt="💬" class="emoji"> Support</h2>
 <p class="has-line-data" data-line-start="321" data-line-end="322"><strong>Found a bug?</strong> Open an issue on <a href="https://github.com/TheGamingMahi/LuaCord/issues">GitHub Issues</a></p>
-<p class="has-line-data" data-line-start="323" data-line-end="324"><strong>Need help?</strong> Check the <a href="https://github.com/jammehcow/Lukkit/wiki">Lukkit Wiki</a> (LuaCord is backwards compatible)</p>
+<p class="has-line-data" data-line-start="323" data-line-end="324"><strong>Need help?</strong> Check the <a href="https://docs.lukkit.net">Lukkit Docs</a> (LuaCord is backwards compatible)</p>
 <hr>
 <h2 class="code-line has-line-data" data-line-start="327" data-line-end="328"><a id="Important_Notes_327"></a><img src="static/emoji/warning.png" alt="⚠️" class="emoji"> Important Notes</h2>
 <ul>
