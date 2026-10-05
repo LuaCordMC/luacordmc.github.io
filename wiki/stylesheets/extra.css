@@ -1,0 +1,19 @@
+/* Keep event and method names on one line, so they don't break in the middle of a word. */
+.md-typeset table td:first-child code {
+  white-space: nowrap;
+}
+
+/* Hide the empty footer bar (the "Made with" notice is switched off in zensical.toml). */
+.md-footer {
+  display: none;
+}
+
+/* The home page has no title of its own, so hide the "Home" heading the theme adds (screen readers still get it). */
+.md-typeset h1#__skip {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}

@@ -174,8 +174,10 @@ For Spigot servers: You can set it to false
     logger.severe("message")
     logger.debug("message")
 
-For full API documentation, see the Lukkit Docs (LuaCord is backwards
-compatible).
+For guides and examples, see the LuaCord Wiki
+(https://luacordmc.github.io/wiki/). For the full API
+reference, the Lukkit Docs (https://docs.lukkit.net) still apply
+(LuaCord is backwards compatible).
 
 ------------------------------------------------------------------------
 
@@ -295,7 +297,7 @@ Configurable loading modes - ✅ Debug mode for troubleshooting
     core plugin itself)
 -   ☐ bStats integration - Built-in support for plugin developers to
     easily add bStats to their Lua plugins
--   ☐ Basic LuaCord Wiki - Simple documentation with essential guides
+-   ☒ Basic LuaCord Wiki - Simple documentation with essential guides
     for plugin development
 -   ☐ More example plugins
 
@@ -346,7 +348,8 @@ Original Lukkit repository: https://github.com/jammehcow/Lukkit
 
 -   Website: https://luacordmc.github.io
 -   JAR Generator: https://luacordmc.github.io/generator.html
--   Documentation: https://docs.lukkit.net (Lukkit docs - LuaCord
+-   Wiki: https://luacordmc.github.io/wiki/
+-   Lukkit Docs: https://docs.lukkit.net (older docs - LuaCord
     compatible)
 -   Issues: https://github.com/TheGamingMahi/LuaCord/issues
 -   CurseForge:
@@ -359,7 +362,8 @@ Original Lukkit repository: https://github.com/jammehcow/Lukkit
 
 Found a bug? Open an issue on GitHub Issues
 
-Need help? Check the Lukkit Docs (LuaCord is backwards compatible)
+Need help? Check the LuaCord Wiki (https://luacordmc.github.io/wiki/)
+The Lukkit Docs also apply, since LuaCord is backwards compatible.
 
 ------------------------------------------------------------------------
 
