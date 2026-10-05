@@ -7,13 +7,3 @@
 .md-footer {
   display: none;
 }
-
-/* The home page has no title of its own, so hide the "Home" heading the theme adds (screen readers still get it). */
-.md-typeset h1#__skip {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  clip: rect(0 0 0 0);
-  white-space: nowrap;
-}
